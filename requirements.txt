@@ -1,0 +1,16 @@
+# Exigences pour le projet de déploiement continu
+
+# Framework Flask pour l'application Python
+Flask==2.1.0
+
+# Bibliothèque de test
+pytest==6.2.4
+
+# Bibliothèque de requêtes HTTP
+requests==2.26.0
+
+# Client Docker pour interagir avec Docker Hub
+docker==5.0.2
+
+# Bibliothèque pour manipuler les fichiers YAML
+pyyaml==5.4.1
