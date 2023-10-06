@@ -1,0 +1,30 @@
+# Dans ce fichier docker-compose.yml, le service web est construit à partir du Dockerfile 
+# dans le répertoire app/ de votre système hôte. L’image Docker construite est taguée avec 
+# le nom d’utilisateur Docker, le nom du dépôt et la version de l’image spécifiés dans 
+# les variables d’environnement de votre pipeline GitLab CI/CD. Le port 5000 du conteneur 
+# Docker est mappé sur le port 5000 de votre système hôte.
+
+version: '3'
+
+services:
+  runner:
+    image: gitlab/gitlab-runner:latest
+    command: gitlab-runner register --non-interactive --url https://gitlab.com --registration-token $CI_RUNNER_TOKEN --executor docker --docker-image $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - registry
+
+  registry:
+    image: registry:2
+    ports:
+      - 5000:5000
+    volumes:
+      - ./registry:/var/lib/registry
+
+  app:
+    image: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    ports:
+      - 8080:8080
+    depends_on:
+      - registry
