@@ -1,5 +1,2 @@
 .DS_Store
-pipeline-cd-schema/.$pipeline-cd.drawio.png.bkp
-./brouillons
-pipeline-cd-schema/pipeline-cd.drawio.png
-pipeline-cd-schema/pipeline-cd.drawio
+/brouillons/*
